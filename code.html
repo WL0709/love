@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .image{
+            width: 200px;
+            height: 200px;
+        }
+        .external{
+            width: 50%; /* 设置宽度 */
+            height: 50%; /* 设置高度 */
+            display: flex; /* 使用 Flexbox 布局 */
+            flex-direction: column; /* 垂直排列子元素 */
+            justify-content: space-between; /* 子元素在容器中上下分布 */
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+            height: 100vh;          /* 使容器高度为视口的100% */
+            background: #f1d5da;
+        }
+        .top{
+
+            padding: 10px; /* 内边距 */
+            text-align: center; /* 文字居中 */
+        }
+        .bottom{
+
+            padding: 10px; /* 内边距 */
+            text-align: center; /* 文字居中 */
+        }
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="container">
+
+        <div class="external">
+            <div v-if="sizeNum===0" style=" text-align: center; ">
+                <h1>!!!喜欢你!! ( >᎑<)♡︎ᐝ</h1>
+                <img src="img/hug.png">
+
+            </div>
+            <div v-else>
+                <div class="top">
+                    <img src="img/heart.png" v-if="sizeNum===1" class="image">
+                    <img src="img/shocked.png" v-if="sizeNum===1.5" class="image">
+                    <img src="img/think.png" v-if="sizeNum===2" class="image">
+                    <img src="img/angry.png" v-if="sizeNum===2.5" class="image">
+                    <img src="img/crying.png" v-if="sizeNum>=3" class="image">
+                    <h1>可以成为我的恋人吗？</h1>
+                </div>
+                <div class="bottom">
+                    <el-button  type="primary"  :style="confirm" @click="sizeNum=0">同意</el-button>
+                    <el-button type="danger" style="margin-left: 10%"  v-if="sizeNum===1" @click="ChangeSize"> 不要</el-button>
+                    <el-button type="danger" style="margin-left: 10%"  v-if="sizeNum===1.5" @click="ChangeSize"> ？你认真的吗…</el-button>
+                    <el-button type="danger" style="margin-left: 10%"  v-if="sizeNum===2" @click="ChangeSize"> 要不再想想？</el-button>
+                    <el-button type="danger" style="margin-left: 10%"  v-if="sizeNum===2.5" @click="ChangeSize"> 不许选这个！ </el-button>
+                    <el-button type="danger" style="margin-left: 10%"  v-if="sizeNum>=3" @click="ChangeSize"> 我会很伤心…</el-button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                sizeNum:1,
+                confirm: {
+                    transform: 'scale(1)'
+                },
+            }
+        },
+        methods: {
+            ChangeSize() {
+                this.sizeNum=this.sizeNum+0.5
+                console.log(this.sizeNum)
+                this.confirm.transform = "scale("+this.sizeNum+")";
+
+            },
+        },
+    })
+</script>
+
+</html>
